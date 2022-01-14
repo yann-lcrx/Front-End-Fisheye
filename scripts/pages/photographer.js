@@ -25,12 +25,6 @@ function displayArtistMedia(photographerName) {
   }
 }
 
-function displayErrorMessage(err) {
-  const errMessage = document.createElement("p");
-  errMessage.innerText = err;
-  document.getElementById("main").appendChild(errMessage);
-}
-
 function setupLikeButtons() {
   for (let likeButton of document.getElementsByClassName("like-section")) {
     likeButton.addEventListener("click", () => {
@@ -38,11 +32,13 @@ function setupLikeButtons() {
         likeButton.children[0].innerText =
           parseInt(likeButton.children[0].innerText) + 1;
         likeButton.classList.add("liked");
+        likeButton.setAttribute("aria-label", "Je n'aime plus ce contenu");
         totalLikeCount.innerText = parseInt(totalLikeCount.innerText) + 1;
       } else {
         likeButton.children[0].innerText =
           parseInt(likeButton.children[0].innerText) - 1;
         likeButton.classList.remove("liked");
+        likeButton.setAttribute("aria-label", "J'aime ce contenu");
         totalLikeCount.innerText = parseInt(totalLikeCount.innerText) - 1;
       }
     });
