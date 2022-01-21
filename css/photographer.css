@@ -159,7 +159,7 @@ textarea {
   padding: 20px;
 }
 
-.img-previews {
+.media-previews {
   display: flex;
   flex-flow: row wrap;
   gap: 24px;
