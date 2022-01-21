@@ -16,6 +16,7 @@ function displayPhotographer(photographer) {
     photographer.getFormattedPrice();
   document.getElementsByTagName("title")[0].innerText =
     photographer.getPageName();
+  document.getElementById("photographer-name").innerText = photographer.name;
 }
 
 function displayArtistMedia(jsonData, photographerName) {

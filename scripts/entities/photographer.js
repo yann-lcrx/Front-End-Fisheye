@@ -24,6 +24,6 @@ class Photographer {
   }
 
   getPreviewDOM() {
-    return `<a role="article" class="preview-card" href="photographer.html?id=${this.id}"><div class="img-wrapper"><img alt="${this.altText}" src="assets/Sample Photos/Photographers ID Photos/${this.portrait}" alt="bonhomme"></div><h2>${this.name}</h2><p class="location">${this.city}, ${this.country}</p><p class="tagline">${this.tagline}</p><p class="price">${this.price}€/jour</p></a>`;
+    return `<article class="preview-card"><a href="photographer.html?id=${this.id}"><div class="img-wrapper"><img alt="${this.altText}" src="assets/Sample Photos/Photographers ID Photos/${this.portrait}" alt="bonhomme"></div><h2>${this.name}</h2><p class="location">${this.city}, ${this.country}</p><p class="tagline">${this.tagline}</p><p class="price">${this.price}€/jour</p></a></article>`;
   }
 }

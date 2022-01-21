@@ -1,5 +1,5 @@
 const modal = document.getElementById("contact_modal");
-const page = document.getElementsByTagName("body")[0];
+const photographerPage = document.getElementById("photographer-page");
 const submitBtn = document.getElementsByClassName("submit-button")[0];
 const allFields = document.querySelectorAll("input, textarea");
 const firstName = document.getElementById("first-name");
@@ -12,14 +12,14 @@ const closeBtn = document.querySelector(".modal img");
 function displayModal() {
   modal.style.display = "block";
   modal.setAttribute("aria-hidden", "false");
-  page.setAttribute("aria-hidden", "true");
+  photographerPage.setAttribute("aria-hidden", "true");
   allFields[0].focus();
 }
 
 function closeModal() {
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
-  page.setAttribute("aria-hidden", "false");
+  photographerPage.setAttribute("aria-hidden", "false");
 }
 
 // form submission

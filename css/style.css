@@ -52,14 +52,6 @@ p {
   margin-top: 100px;
 }
 
-.photographer_section article {
-  justify-self: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .photographer_section article h2 {
   font-size: 36px;
 }
@@ -74,7 +66,7 @@ h2 {
   color: #d3573c;
 }
 
-.preview-card {
+.preview-card a {
   display: flex;
   flex-flow: column nowrap;
   text-align: center;

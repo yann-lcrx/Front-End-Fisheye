@@ -11,7 +11,7 @@ class Video {
           </video>
           <div>
           <p class="media-title">${this.title}</p>
-          <div class="like-section" aria-label="J'aime ce contenu" tabindex="0">
+          <div class="like-section" role="button" tabindex="0" aria-label="J'aime ce contenu">
             <p class="like-count">
             ${this.likes}
             </p>

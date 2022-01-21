@@ -90,17 +90,19 @@ main {
 .modal header {
   justify-content: space-between;
   width: 100%;
+  height: unset;
 }
 
 .modal header img {
   cursor: pointer;
 }
 
-.modal header h2 {
+.modal h1 {
   font-size: 56px;
   font-weight: normal;
-  text-align: center;
   color: unset;
+  margin: 0px;
+  padding-bottom: 16px;
 }
 
 form {
