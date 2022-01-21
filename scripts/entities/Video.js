@@ -5,7 +5,7 @@ class Video {
   }
 
   getDOM() {
-    return `<div tabindex="0" class="media-preview">
+    return `<article tabindex="0" class="media-preview">
           <video tabindex="-1">
             <source src="/assets/Sample Photos/${this.photographerName}/${this.video}">
           </video>
@@ -18,6 +18,6 @@ class Video {
             <i class="fa fa-heart" aria-hidden="true"></i>
           </div>
         </div>
-        </div>`;
+        </article>`;
   }
 }

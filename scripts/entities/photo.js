@@ -5,7 +5,7 @@ class Photo {
   }
 
   getDOM() {
-    return `<div tabindex="0" class="media-preview">
+    return `<article tabindex="0" class="media-preview">
         <img
           src="/assets/Sample Photos/${this.photographerName}/${this.image}"
           alt="${this.altText}"
@@ -19,6 +19,6 @@ class Photo {
             <i class="fa fa-heart" aria-hidden="true"></i>
           </div>
         </div>
-      </div>`;
+      </article>`;
   }
 }
