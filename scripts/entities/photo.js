@@ -4,9 +4,9 @@ class Photo {
     this.photographerName = photographerName;
   }
 
-  getDOM() {
-    return `<article tabindex="0" class="media-preview">
-        <img
+  getPreviewDOM() {
+    return `<article class="media-preview">
+        <img tabindex="0"
           src="/assets/Sample Photos/${this.photographerName}/${this.image}"
           alt="${this.altText}"
         />

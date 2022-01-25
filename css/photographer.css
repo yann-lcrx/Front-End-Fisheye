@@ -3,7 +3,7 @@
 }
 
 #contact_modal,
-.lightbox {
+#lightbox {
   display: none;
   width: 100%;
   height: 100%;
@@ -161,15 +161,11 @@ textarea {
   padding: 20px;
 }
 
-.media-previews {
+#preview-section {
   display: flex;
   flex-flow: row wrap;
   gap: 24px;
   justify-content: space-between;
-}
-
-.media-preview {
-  cursor: pointer;
 }
 
 .media-preview,
@@ -184,6 +180,7 @@ textarea {
   width: 350px;
   height: 300px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .media-preview > div {
@@ -216,6 +213,7 @@ textarea {
   flex-flow: row nowrap;
   align-items: center;
   gap: 6px;
+  cursor: pointer;
 }
 
 .like-section i {
@@ -268,7 +266,7 @@ textarea {
   border: 2px solid #901c1c;
 }
 
-.lightbox {
+#lightbox {
   background-color: white;
   display: none;
   flex-flow: column nowrap;
@@ -276,19 +274,26 @@ textarea {
   justify-content: center;
 }
 
-.lightbox img {
-  max-width: 1050px;
-  max-height: 900px;
-  height: 100%;
+#focused-media {
+  width: 1050px;
+  height: 900px;
+  overflow: hidden;
 }
 
-.lightbox > div {
+#focused-media img,
+#focused-media video {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+#lightbox > div {
   height: 90%;
   display: flex;
   flex-direction: column;
 }
 
-.slideshow {
+#slideshow {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -297,12 +302,12 @@ textarea {
   margin-top: -42px;
 }
 
-.lightbox .chevron {
+#lightbox .chevron {
   width: 60px;
   height: 64px;
 }
 
-.lightbox .close {
+#lightbox .close {
   position: relative;
   z-index: 1;
 }

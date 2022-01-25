@@ -1,7 +1,8 @@
 const currentUrl = new URL(window.location.href);
 const photographerId = parseInt(currentUrl.searchParams.get("id"));
 const totalLikeCount = document.getElementById("total-like-count");
-const mediaPreviews = document.getElementsByClassName("media-previews")[0];
+const previewSection = document.getElementById("preview-section");
+const slideshowCloseBtn = document.getElementsByClassName("close")[0];
 
 function displayPhotographer(photographer) {
   document.getElementById("description").innerHTML +=
@@ -20,10 +21,10 @@ function displayPhotographer(photographer) {
 }
 
 function displayArtistMedia(jsonData, photographerName) {
-  mediaPreviews.innerHTML = null;
+  previewSection.innerHTML = null;
   for (let jsonMedia of jsonData) {
     const media = new MediaFactory(jsonMedia, photographerName);
-    mediaPreviews.innerHTML += media.getDOM();
+    previewSection.innerHTML += media.getPreviewDOM();
   }
 }
 
@@ -90,6 +91,34 @@ async function init() {
   setupSort(photographer.name);
   setupLikeButtons();
   calculateLikeTotal();
+  setupSlideshow(photographer.name);
 }
 
 init();
+
+const lightbox = document.getElementById("lightbox");
+// const slideshow = document.getElementById("slideshow");
+
+function setupSlideshow(photographerName) {
+  const slideshow = new Slideshow(
+    DataManager.getPhotographerMedia(photographerId),
+    photographerName
+  );
+
+  for (let thumbnail of document.querySelectorAll(
+    "article img, article video"
+  )) {
+    thumbnail.addEventListener("click", () => {
+      slideshow.init();
+    });
+  }
+  slideshowCloseBtn.addEventListener("click", () => {
+    slideshow.close();
+  });
+  document.getElementById("chevron-right").addEventListener("click", () => {
+    slideshow.next();
+  });
+  document.getElementById("chevron-left").addEventListener("click", () => {
+    slideshow.prev();
+  });
+}
