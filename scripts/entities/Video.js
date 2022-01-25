@@ -6,7 +6,7 @@ class Video {
 
   getPreviewDOM() {
     return `<article class="media-preview">
-          <video>
+          <video data-id=${this.id}>
             <source src="/assets/Sample Photos/${this.photographerName}/${this.video}">
           </video>
           <div>

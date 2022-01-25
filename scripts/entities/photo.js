@@ -9,6 +9,7 @@ class Photo {
         <img tabindex="0"
           src="/assets/Sample Photos/${this.photographerName}/${this.image}"
           alt="${this.altText}"
+          data-id="${this.id}"
         />
         <div>
           <p class="media-title">${this.title}</p>

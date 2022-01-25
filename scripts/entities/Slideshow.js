@@ -4,10 +4,13 @@ class Slideshow {
     this.photographerName = photographerName;
     this.current = 0;
     this.focusedMedia = null;
+    this.isVisible = false;
   }
 
-  init() {
+  show(id) {
     document.getElementById("lightbox").style.display = "flex";
+    this.isVisible = true;
+    this.current = this.getMediaById(id);
     this.display();
   }
 
@@ -66,6 +69,18 @@ class Slideshow {
   }
 
   close() {
+    this.current = null;
+    document.getElementById("focused-media").innerHTML = "";
     document.getElementById("lightbox").style.display = "none";
+    this.isVisible = false;
+  }
+
+  getMediaById(id) {
+    const idList = this.mediaList.map((media) => {
+      {
+        return media.id.toString();
+      }
+    });
+    return idList.indexOf(id.toString());
   }
 }
