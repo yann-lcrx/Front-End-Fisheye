@@ -4,9 +4,9 @@ class Video {
     this.photographerName = photographerName;
   }
 
-  getDOM() {
-    return `<article tabindex="0" class="media-preview">
-          <video tabindex="-1">
+  getPreviewDOM() {
+    return `<article class="media-preview">
+          <video data-id=${this.id}>
             <source src="/assets/Sample Photos/${this.photographerName}/${this.video}">
           </video>
           <div>

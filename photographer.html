@@ -23,6 +23,7 @@
           alt="Page d'accueil de Fisheye"
       /></a>
     </header>
+
     <main id="main">
       <div id="photographer-page">
         <div class="photographer-header">
@@ -51,7 +52,7 @@
               <option value="title">Titre</option>
             </select>
           </div>
-          <div class="media-previews"></div>
+          <div id="preview-section"></div>
         </div>
         <div class="widget">
           <div>
@@ -119,7 +120,7 @@
         </div>
       </div>
 
-      <div class="lightbox" role="dialog">
+      <div id="lightbox" role="dialog">
         <div>
           <div class="close-wrapper">
             <img
@@ -128,23 +129,22 @@
               class="close"
             />
           </div>
-          <div class="slideshow">
+          <div id="slideshow">
             <img
               src="/assets/icons/chevron-left.svg"
               alt="image précédente"
               class="chevron"
+              id="chevron-left"
             />
             <div>
-              <img
-                src="/assets/Sample Photos/Ellie-Rose Wilkens/Architecture_Cross_Bar.jpg"
-                alt="photographie"
-              />
-              <p class="photograph-name">Arc-en-ciel</p>
+              <div id="focused-media"></div>
+              <p id="focused-media-title">Arc-en-ciel</p>
             </div>
             <img
               src="/assets/icons/chevron-right.svg"
               alt="image suivante"
               class="chevron"
+              id="chevron-right"
             />
           </div>
         </div>
@@ -156,6 +156,7 @@
     <script src="/scripts/entities/Photographer.js"></script>
     <script src="/scripts/entities/Photo.js"></script>
     <script src="/scripts/entities/Video.js"></script>
+    <script src="/scripts/entities/Slideshow.js"></script>
     <script src="/scripts/factories/Media.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/pages/photographer.js"></script>

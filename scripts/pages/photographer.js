@@ -1,7 +1,8 @@
 const currentUrl = new URL(window.location.href);
 const photographerId = parseInt(currentUrl.searchParams.get("id"));
 const totalLikeCount = document.getElementById("total-like-count");
-const mediaPreviews = document.getElementsByClassName("media-previews")[0];
+const previewSection = document.getElementById("preview-section");
+const slideshowCloseBtn = document.getElementsByClassName("close")[0];
 
 function displayPhotographer(photographer) {
   document.getElementById("description").innerHTML +=
@@ -20,28 +21,45 @@ function displayPhotographer(photographer) {
 }
 
 function displayArtistMedia(jsonData, photographerName) {
-  mediaPreviews.innerHTML = null;
+  previewSection.innerHTML = null;
   for (let jsonMedia of jsonData) {
     const media = new MediaFactory(jsonMedia, photographerName);
-    mediaPreviews.innerHTML += media.getDOM();
+    previewSection.innerHTML += media.getPreviewDOM();
   }
+}
+
+function likeMedia(likeButton) {
+  likeButton.children[0].innerText =
+    parseInt(likeButton.children[0].innerText) + 1;
+  likeButton.classList.add("liked");
+  likeButton.setAttribute("aria-label", "Je n'aime plus ce contenu");
+  totalLikeCount.innerText = parseInt(totalLikeCount.innerText) + 1;
+}
+
+function unlikeMedia(likeButton) {
+  likeButton.children[0].innerText =
+    parseInt(likeButton.children[0].innerText) - 1;
+  likeButton.classList.remove("liked");
+  likeButton.setAttribute("aria-label", "J'aime ce contenu");
+  totalLikeCount.innerText = parseInt(totalLikeCount.innerText) - 1;
 }
 
 function setupLikeButtons() {
   for (let likeButton of document.getElementsByClassName("like-section")) {
     likeButton.addEventListener("click", () => {
       if (!likeButton.classList.contains("liked")) {
-        likeButton.children[0].innerText =
-          parseInt(likeButton.children[0].innerText) + 1;
-        likeButton.classList.add("liked");
-        likeButton.setAttribute("aria-label", "Je n'aime plus ce contenu");
-        totalLikeCount.innerText = parseInt(totalLikeCount.innerText) + 1;
+        likeMedia(likeButton);
       } else {
-        likeButton.children[0].innerText =
-          parseInt(likeButton.children[0].innerText) - 1;
-        likeButton.classList.remove("liked");
-        likeButton.setAttribute("aria-label", "J'aime ce contenu");
-        totalLikeCount.innerText = parseInt(totalLikeCount.innerText) - 1;
+        unlikeMedia(likeButton);
+      }
+    });
+    likeButton.addEventListener("keyup", (event) => {
+      if (event.key === "Enter") {
+        if (!likeButton.classList.contains("liked")) {
+          likeMedia(likeButton);
+        } else {
+          unlikeMedia(likeButton);
+        }
       }
     });
   }
@@ -90,6 +108,45 @@ async function init() {
   setupSort(photographer.name);
   setupLikeButtons();
   calculateLikeTotal();
+  setupSlideshow(photographer.name);
 }
 
 init();
+
+const lightbox = document.getElementById("lightbox");
+// const slideshow = document.getElementById("slideshow");
+
+function setupSlideshow(photographerName) {
+  const slideshow = new Slideshow(
+    DataManager.getPhotographerMedia(photographerId),
+    photographerName
+  );
+
+  for (let thumbnail of document.querySelectorAll(
+    "article img, article video"
+  )) {
+    thumbnail.addEventListener("click", (event) => {
+      slideshow.show(event.currentTarget.dataset.id);
+    });
+    thumbnail.addEventListener("keyup", (event) => {
+      if (event.key === "Enter" && !slideshow.isVisible)
+        slideshow.show(event.currentTarget.dataset.id);
+    });
+  }
+  slideshowCloseBtn.addEventListener("click", () => {
+    slideshow.close();
+  });
+  document.getElementById("chevron-right").addEventListener("click", () => {
+    slideshow.next();
+  });
+  document.getElementById("chevron-left").addEventListener("click", () => {
+    slideshow.prev();
+  });
+  window.addEventListener("keyup", (event) => {
+    if (slideshow.isVisible) {
+      if (event.key === "ArrowLeft") slideshow.prev();
+      if (event.key === "ArrowRight") slideshow.next();
+      if (event.key === "Escape") slideshow.close();
+    }
+  });
+}
