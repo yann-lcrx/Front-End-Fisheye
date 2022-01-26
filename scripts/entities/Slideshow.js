@@ -44,7 +44,7 @@ class Slideshow {
       };
 
     document.getElementById("focused-media").appendChild(this.focusedMedia);
-    document.getElementById("focused-media-name").innerText =
+    document.getElementById("focused-media-title").innerText =
       this.mediaList[this.current].title;
   }
 

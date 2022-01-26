@@ -73,10 +73,7 @@ h2 {
   align-items: center;
 }
 
-a:focus,
-select:focus,
-button:focus,
-div:focus {
+*:focus {
   outline: 2px #0085be solid;
 }
 
