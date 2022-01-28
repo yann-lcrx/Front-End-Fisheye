@@ -39,7 +39,6 @@ main {
 
 .photographer-header .location {
   font-size: 24px;
-  color: #901c1c;
   margin-bottom: 16px;
 }
 
@@ -61,9 +60,13 @@ main {
   width: 170px;
   height: 70px;
   border: none;
-  background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.contact_button,
+.photographer-gallery select {
+  background-color: #901c1c;
 }
 
 .contact_button:hover,
@@ -152,7 +155,6 @@ textarea {
 }
 
 .photographer-gallery select {
-  background-color: #901c1c;
   color: #ffffff;
   border-radius: 5px;
   font-size: 18px;
@@ -200,8 +202,8 @@ textarea {
   font-size: 18px;
 }
 
-.media-title {
-  color: #901c1c;
+.media-title,
+div.liked .like-count {
   font-size: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -216,7 +218,11 @@ textarea {
   cursor: pointer;
 }
 
-.like-section i {
+.like-section i,
+.media-title,
+div.liked .like-count,
+.error-wrapper,
+.photographer-header .location {
   color: #901c1c;
 }
 
@@ -254,7 +260,6 @@ textarea {
   margin: 0px;
   height: 16px;
   font-size: 12px;
-  color: #901c1c;
   margin-bottom: 2px;
 }
 
@@ -329,9 +334,4 @@ textarea {
 
 #description {
   max-width: 374px;
-}
-
-#focused-media-title {
-  color: #901c1c;
-  font-size: 24px;
 }

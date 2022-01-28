@@ -8,6 +8,7 @@ const email = document.getElementById("email");
 const message = document.getElementById("message");
 const errorSpaces = document.querySelectorAll(".error-wrapper p");
 const closeBtn = document.querySelector(".modal img");
+const contactBtn = document.getElementsByClassName("contact_button")[0];
 
 function displayModal() {
   modal.style.display = "block";
@@ -20,6 +21,7 @@ function closeModal() {
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   photographerPage.setAttribute("aria-hidden", "false");
+  contactBtn.focus();
 }
 
 // form submission

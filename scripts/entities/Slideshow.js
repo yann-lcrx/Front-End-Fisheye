@@ -46,6 +46,7 @@ class Slideshow {
     document.getElementById("focused-media").appendChild(this.focusedMedia);
     document.getElementById("focused-media-title").innerText =
       this.mediaList[this.current].title;
+    this.focusedMedia.focus();
   }
 
   next() {
@@ -82,5 +83,26 @@ class Slideshow {
       }
     });
     return idList.indexOf(id.toString());
+  }
+
+  setupControls() {
+    document
+      .getElementsByClassName("close")[0]
+      .addEventListener("click", () => {
+        this.close();
+      });
+    document.getElementById("chevron-right").addEventListener("click", () => {
+      this.next();
+    });
+    document.getElementById("chevron-left").addEventListener("click", () => {
+      this.prev();
+    });
+    window.addEventListener("keyup", (event) => {
+      if (this.isVisible) {
+        if (event.key === "ArrowLeft") this.prev();
+        if (event.key === "ArrowRight") this.next();
+        if (event.key === "Escape") this.close();
+      }
+    });
   }
 }
