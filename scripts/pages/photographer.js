@@ -2,6 +2,8 @@ const currentUrl = new URL(window.location.href);
 const photographerId = parseInt(currentUrl.searchParams.get("id"));
 const totalLikeCount = document.getElementById("total-like-count");
 const previewSection = document.getElementById("preview-section");
+const sortOptions = document.getElementById("sort-options");
+const lightbox = document.getElementById("lightbox");
 
 function displayPhotographer(photographer) {
   document.getElementById("description").innerHTML +=
@@ -116,13 +118,26 @@ async function init() {
 
 init();
 
-const lightbox = document.getElementById("lightbox");
-
 function setupSlideshow(photographerName) {
-  const slideshow = new Slideshow(
-    DataManager.getPhotographerMedia(photographerId),
-    photographerName
-  );
+  let slideshow;
+  switch (sortOptions.value) {
+    case "date":
+      slideshow = new Slideshow(
+        DataManager.getPhotographerMediaByDate(photographerId),
+        photographerName
+      );
+    case "popularity":
+      slideshow = new Slideshow(
+        DataManager.getPhotographerMediaByPopularity(photographerId),
+        photographerName
+      );
+    case "title":
+      slideshow = new Slideshow(
+        DataManager.getPhotographerMediaByTitle(photographerId),
+        photographerName
+      );
+  }
+
   slideshow.setupControls();
   for (let thumbnail of document.querySelectorAll(
     "article img, article video"
