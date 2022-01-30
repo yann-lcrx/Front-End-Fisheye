@@ -22,4 +22,15 @@ class Photo {
         </div>
       </article>`;
   }
+
+  getDOM() {
+    document.getElementById("focused-media-title").innerText = this.title;
+    return `<img 
+              src="/assets/Sample Photos/${this.photographerName}/${this.image}" 
+              alt="${this.altText}" />`;
+  }
+
+  focus() {
+    document.querySelector("#focused-media img").focus();
+  }
 }

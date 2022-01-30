@@ -19,38 +19,13 @@ class Slideshow {
   }
 
   display() {
-    if (this.mediaList[this.current].image) {
-      this.focusedMedia = document.createElement("img");
-      this.focusedMedia.setAttribute(
-        "src",
-        `/assets/Sample Photos/${this.photographerName}/${
-          this.mediaList[this.current].image
-        }`
-      );
-      this.focusedMedia.setAttribute(
-        "alt",
-        this.mediaList[this.current].altText
-      );
-    } else if (this.mediaList[this.current].video) {
-      this.focusedMedia = document.createElement("video");
-      this.focusedMedia.setAttribute(
-        "src",
-        `/assets/Sample Photos/${this.photographerName}/${
-          this.mediaList[this.current].video
-        }`
-      );
-      this.focusedMedia.setAttribute("controls", `true`);
-    } else
-      throw (err) => {
-        const errMessage = new ErrorManager(err);
-        document.getElementById("focused-media").innerHTML +=
-          errMessage.getErrorMessageDOM();
-      };
+    const media = new MediaFactory(
+      this.mediaList[this.current],
+      this.photographerName
+    );
 
-    document.getElementById("focused-media").appendChild(this.focusedMedia);
-    document.getElementById("focused-media-title").innerText =
-      this.mediaList[this.current].title;
-    this.focusedMedia.focus();
+    document.getElementById("focused-media").innerHTML = media.getDOM();
+    media.focus();
   }
 
   next() {

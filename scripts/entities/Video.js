@@ -20,4 +20,15 @@ class Video {
         </div>
         </article>`;
   }
+
+  getDOM() {
+    document.getElementById("focused-media-title").innerText = this.title;
+    return `<video 
+              src="/assets/Sample Photos/${this.photographerName}/${this.video}"
+              controls="true"></video>`;
+  }
+
+  focus() {
+    document.querySelector("#focused-media video").focus();
+  }
 }
