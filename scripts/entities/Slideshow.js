@@ -11,6 +11,10 @@ class Slideshow {
     document.getElementById("lightbox").style.display = "flex";
     this.isVisible = true;
     this.current = this.getMediaById(id);
+    document.getElementById("lightbox").setAttribute("aria-hidden", "false");
+    document
+      .getElementById("photographer-page")
+      .setAttribute("aria-hidden", "true");
     this.display();
   }
 
@@ -71,8 +75,12 @@ class Slideshow {
 
   close() {
     this.current = null;
-    document.getElementById("focused-media").innerHTML = "";
+    document.getElementById("lightbox").setAttribute("aria-hidden", "true");
+    document
+      .getElementById("photographer-page")
+      .setAttribute("aria-hidden", "false");
     document.getElementById("lightbox").style.display = "none";
+    document.getElementById("focused-media").innerHTML = "";
     this.isVisible = false;
   }
 

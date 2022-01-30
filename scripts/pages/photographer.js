@@ -5,22 +5,6 @@ const previewSection = document.getElementById("preview-section");
 const sortOptions = document.getElementById("sort-options");
 const lightbox = document.getElementById("lightbox");
 
-function displayPhotographer(photographer) {
-  document.getElementById("description").innerHTML +=
-    photographer.getPhotographerDetailsDOM();
-  document
-    .getElementById("profile-pic")
-    .setAttribute("src", photographer.getPortraitUrl());
-  document
-    .getElementById("profile-pic")
-    .setAttribute("alt", photographer.altText);
-  document.getElementById("price-count").innerText =
-    photographer.getFormattedPrice();
-  document.getElementsByTagName("title")[0].innerText =
-    photographer.getPageName();
-  document.getElementById("photographer-name").innerText = photographer.name;
-}
-
 function displayArtistMedia(jsonData, photographerName) {
   previewSection.innerHTML = null;
   for (let jsonMedia of jsonData) {
@@ -88,6 +72,7 @@ function setupSort(photographerName) {
           photographerName
         );
       }
+      setupLikeButtons();
       setupSlideshow(photographerName);
     });
 }
@@ -99,24 +84,6 @@ function calculateLikeTotal() {
   }
   totalLikeCount.innerText = newLikeCount;
 }
-
-async function init() {
-  await DataManager.loadJson("../../data/photographers.json");
-  const photographer = new Photographer(
-    DataManager.getPhotographer(photographerId)
-  );
-  displayPhotographer(photographer);
-  displayArtistMedia(
-    DataManager.getPhotographerMediaByPopularity(photographerId),
-    photographer.name
-  );
-  setupSort(photographer.name);
-  setupLikeButtons();
-  calculateLikeTotal();
-  setupSlideshow(photographer.name);
-}
-
-init();
 
 function setupSlideshow(photographerName) {
   let slideshow;
@@ -151,3 +118,21 @@ function setupSlideshow(photographerName) {
     });
   }
 }
+
+async function init() {
+  await DataManager.loadJson("../../data/photographers.json");
+  const photographer = new Photographer(
+    DataManager.getPhotographer(photographerId)
+  );
+  photographer.displayPage();
+  displayArtistMedia(
+    DataManager.getPhotographerMediaByPopularity(photographerId),
+    photographer.name
+  );
+  setupSort(photographer.name);
+  setupLikeButtons();
+  calculateLikeTotal();
+  setupSlideshow(photographer.name);
+}
+
+init();
