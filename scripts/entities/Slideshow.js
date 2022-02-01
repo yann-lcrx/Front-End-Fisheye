@@ -88,4 +88,8 @@ class Slideshow {
       }
     });
   }
+
+  changeMediaList(mediaList) {
+    this.mediaList = mediaList;
+  }
 }

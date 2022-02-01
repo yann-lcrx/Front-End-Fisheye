@@ -5,6 +5,8 @@ const previewSection = document.getElementById("preview-section");
 const sortOptions = document.getElementById("sort-options");
 const lightbox = document.getElementById("lightbox");
 
+let slideshow;
+
 function displayArtistMedia(jsonData, photographerName) {
   previewSection.innerHTML = null;
   for (let jsonMedia of jsonData) {
@@ -29,7 +31,7 @@ function unlikeMedia(likeButton) {
   totalLikeCount.innerText = parseInt(totalLikeCount.innerText) - 1;
 }
 
-function setupLikeButtons() {
+function setupLikeButtonEvents() {
   for (let likeButton of document.getElementsByClassName("like-section")) {
     likeButton.addEventListener("click", () => {
       if (!likeButton.classList.contains("liked")) {
@@ -51,30 +53,38 @@ function setupLikeButtons() {
 }
 
 function setupSort(photographerName) {
-  document
-    .getElementById("sort-options")
-    .addEventListener("change", (event) => {
-      if (event.target.value === "popularity") {
-        displayArtistMedia(
-          DataManager.getPhotographerMediaByPopularity(photographerId),
-          photographerName
-        );
-      }
-      if (event.target.value === "date") {
-        displayArtistMedia(
-          DataManager.getPhotographerMediaByDate(photographerId),
-          photographerName
-        );
-      }
-      if (event.target.value === "title") {
-        displayArtistMedia(
-          DataManager.getPhotographerMediaByTitle(photographerId),
-          photographerName
-        );
-      }
-      setupLikeButtons();
-      setupSlideshow(photographerName);
-    });
+  sortOptions.value = "popularity";
+  sortOptions.addEventListener("change", (event) => {
+    if (event.target.value === "popularity") {
+      displayArtistMedia(
+        DataManager.getPhotographerMediaByPopularity(photographerId),
+        photographerName
+      );
+      slideshow.changeMediaList(
+        DataManager.getPhotographerMediaByPopularity(photographerId)
+      );
+    }
+    if (event.target.value === "date") {
+      displayArtistMedia(
+        DataManager.getPhotographerMediaByDate(photographerId),
+        photographerName
+      );
+      slideshow.changeMediaList(
+        DataManager.getPhotographerMediaByDate(photographerId)
+      );
+    }
+    if (event.target.value === "title") {
+      displayArtistMedia(
+        DataManager.getPhotographerMediaByTitle(photographerId),
+        photographerName
+      );
+      slideshow.changeMediaList(
+        DataManager.getPhotographerMediaByTitle(photographerId)
+      );
+    }
+    setupLikeButtonEvents();
+    setupThumbnailEvents();
+  });
 }
 
 function calculateLikeTotal() {
@@ -85,27 +95,7 @@ function calculateLikeTotal() {
   totalLikeCount.innerText = newLikeCount;
 }
 
-function setupSlideshow(photographerName) {
-  let slideshow;
-  switch (sortOptions.value) {
-    case "date":
-      slideshow = new Slideshow(
-        DataManager.getPhotographerMediaByDate(photographerId),
-        photographerName
-      );
-    case "popularity":
-      slideshow = new Slideshow(
-        DataManager.getPhotographerMediaByPopularity(photographerId),
-        photographerName
-      );
-    case "title":
-      slideshow = new Slideshow(
-        DataManager.getPhotographerMediaByTitle(photographerId),
-        photographerName
-      );
-  }
-
-  slideshow.setupControls();
+function setupThumbnailEvents() {
   for (let thumbnail of document.querySelectorAll(
     "article img, article video"
   )) {
@@ -119,6 +109,14 @@ function setupSlideshow(photographerName) {
   }
 }
 
+function setupSlideshow(photographerName) {
+  slideshow = new Slideshow(
+    DataManager.getPhotographerMediaByPopularity(photographerId),
+    photographerName
+  );
+  slideshow.setupControls();
+}
+
 async function init() {
   await DataManager.loadJson("../../data/photographers.json");
   const photographer = new Photographer(
@@ -130,9 +128,10 @@ async function init() {
     photographer.name
   );
   setupSort(photographer.name);
-  setupLikeButtons();
+  setupLikeButtonEvents();
   calculateLikeTotal();
   setupSlideshow(photographer.name);
+  setupThumbnailEvents();
 }
 
 init();
