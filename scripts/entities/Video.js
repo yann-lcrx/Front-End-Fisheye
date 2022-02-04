@@ -4,6 +4,7 @@ class Video {
     this.photographerName = photographerName;
   }
 
+  //generate a thumbnail
   getPreviewDOM() {
     return `<article class="media-preview">
           <video data-id=${this.id}>
@@ -21,6 +22,7 @@ class Video {
         </article>`;
   }
 
+  //generate a version suited for the slideshow and update its title
   getDOM() {
     document.getElementById("focused-media-title").innerText = this.title;
     return `<video 

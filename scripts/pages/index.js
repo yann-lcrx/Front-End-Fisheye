@@ -1,6 +1,6 @@
 async function displayData() {
-  const jsonPhotographers = DataManager.getPhotographers();
-  for (let jsonPhotographer of jsonPhotographers) {
+  //display preview article for each photographer in database
+  for (let jsonPhotographer of DataManager.getPhotographers()) {
     const photographer = new Photographer(jsonPhotographer);
     document.getElementsByClassName("photographer_section")[0].innerHTML +=
       photographer.getPreviewDOM();

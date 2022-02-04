@@ -36,6 +36,7 @@ submitBtn.addEventListener("click", (event) => {
   } else addErrorMessage();
 });
 
+//returns true if all inputs are valid, false if at least one is invalid
 function validateInput() {
   let valid = true;
   for (let input of allFields) {

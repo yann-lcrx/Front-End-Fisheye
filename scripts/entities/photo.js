@@ -4,6 +4,7 @@ class Photo {
     this.photographerName = photographerName;
   }
 
+  //generate a thumbnail
   getPreviewDOM() {
     return `<article class="media-preview">
         <img tabindex="0"
@@ -23,6 +24,7 @@ class Photo {
       </article>`;
   }
 
+  //generate a version suited for the slideshow and update its title
   getDOM() {
     document.getElementById("focused-media-title").innerText = this.title;
     return `<img 

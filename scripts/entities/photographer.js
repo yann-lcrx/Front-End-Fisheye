@@ -23,10 +23,12 @@ class Photographer {
     `;
   }
 
+  //generate homepage photographer preview
   getPreviewDOM() {
     return `<article class="preview-card"><a href="photographer.html?id=${this.id}"><div class="img-wrapper"><img alt="${this.name}" src="assets/Sample Photos/Photographers ID Photos/${this.portrait}" alt="bonhomme"></div><h2>${this.name}</h2><p class="location">${this.city}, ${this.country}</p><p class="tagline">${this.tagline}</p><p class="price">${this.price}€/jour</p></a></article>`;
   }
 
+  //change photographer.html values to artist's info
   displayPage() {
     document.getElementById("description").innerHTML +=
       this.getPhotographerDetailsDOM();

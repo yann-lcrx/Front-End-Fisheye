@@ -52,7 +52,8 @@ function setupLikeButtonEvents() {
   }
 }
 
-function setupSort(photographerName) {
+//setup all user events on sort (sort, like buttons, thumbnails)
+function setupUserEvents(photographerName) {
   sortOptions.value = "popularity";
   sortOptions.addEventListener("change", (event) => {
     if (event.target.value === "popularity") {
@@ -118,6 +119,7 @@ function setupSlideshow(photographerName) {
 }
 
 async function init() {
+  //fetch data from database
   await DataManager.loadJson("../../data/photographers.json");
   const photographer = new Photographer(
     DataManager.getPhotographer(photographerId)
@@ -127,7 +129,7 @@ async function init() {
     DataManager.getPhotographerMediaByPopularity(photographerId),
     photographer.name
   );
-  setupSort(photographer.name);
+  setupUserEvents(photographer.name);
   setupLikeButtonEvents();
   calculateLikeTotal();
   setupSlideshow(photographer.name);

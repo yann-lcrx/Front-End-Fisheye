@@ -7,6 +7,7 @@ class Slideshow {
     this.isVisible = false;
   }
 
+  //make slideshow visible and load selected picture
   show(id) {
     document.getElementById("lightbox").style.display = "flex";
     this.isVisible = true;
@@ -32,6 +33,7 @@ class Slideshow {
     if (this.current < this.mediaList.length - 1) {
       this.current++;
     } else {
+      //if last picture, jump to the first
       this.current = 0;
     }
     document.getElementById("focused-media").innerHTML = "";
@@ -42,12 +44,14 @@ class Slideshow {
     if (this.current > 0) {
       this.current--;
     } else {
+      //if first picture, jump to the last
       this.current = this.mediaList.length - 1;
     }
     document.getElementById("focused-media").innerHTML = "";
     this.display();
   }
 
+  //close modal, erase its media
   close() {
     this.current = null;
     document.getElementById("lightbox").setAttribute("aria-hidden", "true");
@@ -60,11 +64,14 @@ class Slideshow {
   }
 
   getMediaById(id) {
+    // get a list of all the slideshow media IDs
     const idList = this.mediaList.map((media) => {
       {
         return media.id.toString();
       }
     });
+
+    //return index of selected media id
     return idList.indexOf(id.toString());
   }
 
@@ -80,6 +87,7 @@ class Slideshow {
     document.getElementById("chevron-left").addEventListener("click", () => {
       this.prev();
     });
+    //setup keyboard events
     window.addEventListener("keyup", (event) => {
       if (this.isVisible) {
         if (event.key === "ArrowLeft") this.prev();
